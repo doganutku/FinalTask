@@ -18,7 +18,7 @@ PC’lere 2. IP adreslerini verme
     172.16.42.0 - 172.16.42.127 (mask 255.255.255.128)
     172.16.42.128 - 172.16.42.191 (mask 255.255.255.192)
 
-![sw1](https://github.com/doganutku/FinalTask/assets/93640554/a7ecdddf-f8ab-403c-8acc-40a742636cdc)
+
 
 Command Screen:
 
@@ -188,7 +188,7 @@ After that, we need to arrange ports in SW6:
 	switchport mode access
 fa0/24 port must be trunk, this is our only connection to the router.
 
-![sw2](https://github.com/doganutku/FinalTask/assets/93640554/045f6586-1ae9-4a81-8748-7383491270de)
+
 
 
 
@@ -207,5 +207,5 @@ For port security:
 	switchport port-security maximum 1
 	switchport port-security violation protect.
 	
-![sw3](https://github.com/doganutku/FinalTask/assets/93640554/002802b0-02e0-4fef-bde9-e3d5df25d2a7)
+
 
