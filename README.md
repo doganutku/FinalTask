@@ -36,9 +36,9 @@ Command Screen:
 	
 PC IP Addresses:
 
-	PC name	IP Address		mask				gateway
+	PC name	IP Address		        mask			gateway
 	PC4		172.16.42.2		255.255.255.128		172.16.42.1
-	PC5		172.16.42.130	255.255.255.192		172.16.42.129
+	PC5		172.16.42.130		255.255.255.192		172.16.42.129
 	
 - STEP2:
 
