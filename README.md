@@ -93,8 +93,101 @@ in SW1:
 	exit
 	wr
 	
-- STEP4:
+- STEP4/5/6/7:
 
 VAN Routera bağlı switchlere yeni bir switch (SW4) eklendi.
 
 Bu yeni  switchin hem SW6’ya hem de SW5’e bağlanması.
+
+in SW6:
+
+	enable
+	configure terminal
+	vlan 10
+	name KULLANICI
+	exit
+	vlan 20
+	name SUNUCU
+	exit
+	vlan 30
+	name MISAFIR
+	exit
+	
+in SW4:
+
+	enable
+	configure terminal
+	interface range fa0/1-10
+	switchport access vlan10
+	exit
+	interface range fa0/11-20
+	switchport access vlan30
+	
+in SW5:
+
+	enable
+	configure terminal
+	interface range fa0/1-20
+	switchport access vlan20
+	
+in SW4:
+
+	PC1 ip address: 192.168.65.5
+	mask: 255.255.255.0
+	gateway: 192.168.65.1
+	
+	MISAFIR PC ip address: 192.168.200.5
+	mask: 255.255.255.0
+	gateway: 192.168.200.1
+	
+in VAN Router:
+
+	enable
+	configure terminal
+	hostname VAN
+	interface fa0/0.10
+	encapsulation dot1q 10
+	ip address 192.168.65.1 255.255.255.0
+	exit
+	interface fa0/0.20
+	encapsulation dot1q 20
+	ip address 192.168.165.1 255.255.255.0
+	exit
+	interface fa0/0.30
+	encapsulation dot1q 30
+	ip address 192.168.200.1 255.255.255.0
+	exit
+	
+	ip dhcp pool vlan10
+	network 192.168.65.0 255.255.255.0
+	default-router 192.168.65.1
+	ip dhcp pool vlan20
+	network 192.168.165.0 255.255.255.0
+	default-router 192.168.165.1
+	ip dhcp pool vlan30
+	network 192.168.200.0 255.255.255.0
+	default-router 192.168.200.1
+	
+using per vlan stp, we can arrange different root bridges for different vlan's.
+
+also using rapid-pvst, we can make faster port connection.
+
+	SW4(config)#spanning tree vlan 10 priority 0
+		    spanning-tree mode rapid-pvst
+	SW5(config)#spanning tree vlan 20 priority 0
+		    spanning-tree mode rapid-pvst
+	SW6(config)#spanning tree vlan 30 priority 0
+		    spanning-tree mode rapid-pvst
+
+After that, we need to arrange ports in SW6:
+
+	interface fa0/22
+	switchport access vlan 10
+	switchport access vlan 20
+	switchport access vlan 30
+	switchport mode access
+fa0/24 port must be trunk, this is our only connection to the router.
+
+![sw2](https://github.com/doganutku/FinalTask/assets/93640554/045f6586-1ae9-4a81-8748-7383491270de)
+
+
