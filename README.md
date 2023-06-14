@@ -191,3 +191,21 @@ fa0/24 port must be trunk, this is our only connection to the router.
 ![sw2](https://github.com/doganutku/FinalTask/assets/93640554/045f6586-1ae9-4a81-8748-7383491270de)
 
 
+
+- STEP8:
+
+For fast connection between router and end-users, we can use portfast. 
+
+in SW4:
+
+	interface range fa0/1-20
+	spanning-tree portfast
+It gives us a warning message about loop threat for each port, we need to use it carefully.
+
+For port security:
+
+	switchport port-security maximum 1
+	switchport port-security violation protect.
+	
+![sw3](https://github.com/doganutku/FinalTask/assets/93640554/002802b0-02e0-4fef-bde9-e3d5df25d2a7)
+
